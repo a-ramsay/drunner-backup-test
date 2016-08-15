@@ -5,11 +5,10 @@ services:
   backup-test:
     image: aramsay/backup-test
     volumes:
-      - "drunner-a:/usr/share/nginx/html/a"
-      - "drunner-b:/usr/share/nginx/html/b"
-      - "drunner-c:/usr/share/nginx/html/c"
       - "drunner-d:/usr/share/nginx/html/d"
-      - "mystery-volume:/mnt/myster-volume"
+      - "drunner-c:/usr/share/nginx/html/c"
+      - "drunner-b:/usr/share/nginx/html/b"
+      - "drunner-a:/usr/share/nginx/html/a"
     restart: always
     ports:
       - "8000:8000"
