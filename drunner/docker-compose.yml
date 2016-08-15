@@ -1,0 +1,37 @@
+version: '2'
+# we can use docker-compose style services: (see https://docs.docker.com/compose/compose-file/ for docs)
+#
+services:
+  backup-test:
+    image: aramsay/backup-test
+    volumes:
+      - "drunner-a:/usr/share/nginx/html/a"
+      - "drunner-b:/usr/share/nginx/html/b"
+      - "drunner-c:/usr/share/nginx/html/c"
+      - "drunner-d:/usr/share/nginx/html/d"
+      - "mystery-volume:/mnt/myster-volume"
+    restart: always
+    ports:
+      - "8000:8000"
+    network_mode: bridge
+
+# we manage services manually in servicerunner, so there's no services
+# section.
+
+# if we don't want to use dRunner's environment variables for our
+# configuraiton we should reinstate the config volume with this.
+#
+volumes:
+  mystery-volume:
+  drunner-a:
+    external:
+      name: "drunner-${SERVICENAME}-a"
+  drunner-b:
+    external:
+      name: "drunner-${SERVICENAME}-b"
+  drunner-c:
+    external:
+      name: "drunner-${SERVICENAME}-c"
+  drunner-d:
+    external:
+      name: "drunner-${SERVICENAME}-d"
